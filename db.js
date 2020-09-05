@@ -8,13 +8,16 @@
  * Writer data[i][15]
  * Actors data[i][16-18] obj {name: string, locations: string} Grab from locations
  */
+const mongo = require("mongodb");
+const mongoose = require("mongoose");
+const dataFormat = require("./schema");
 const movieData = require("./films");
 var movies = movieData.data, iter = 1;
 
 while(iter > 0){
     for(var i = 0, len = 5; i < len; i++){
-        var title = movies[i][8];
-        console.log(title);
+        var title = movies[i][8], preTitle = movies[i - 1][8] != undefined ? movies[i - 1][8] : "";
+        
     }
     iter--;
 }

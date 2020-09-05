@@ -1,0 +1,16 @@
+{
+  "name": "movies_to_mongodb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "db.js",
+  "dependencies": {
+    "mongodb": "^3.6.1",
+    "mongoose": "^5.10.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alek Bouillon",
+  "license": "MIT"
+}
