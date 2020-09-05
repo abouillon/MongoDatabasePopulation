@@ -1,0 +1,19 @@
+{
+  "title": "string",
+  "releaseYear": "number",
+  "locations": [
+    "string"
+  ],
+  "productionCompany": "string",
+  "distributor": "string",
+  "director": "string",
+  "writer": "string",
+  "actors": [
+    {
+      "name": "string",
+      "locations": [
+        "string"
+      ]
+    }
+  ]
+}

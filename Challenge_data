@@ -1,0 +1,12 @@
+Challenge Problem:
+During this challenging time of COVID-19, many families have been watching movies at home.
+The city of San Francisco provides a dataset of all the different movies that
+shoot scenes in the city. This data includes the movie name, location, and actors,
+to name a few fields. Use the provided films.json to populate MongoDB matching the
+schema.json provided. You will have to transform the data to match the schema. This
+be done using either Python or JavaScript.
+
+Output:
+Public Github Repo
+  - Scripts to transform the data
+  - README on how to run
