@@ -2,10 +2,26 @@ const mongo = require("mongodb");
 const dataFormat = require("./schema");
 const movieData = require("./films");
 const mongoclient = new mongo.MongoClient(new mongo.Server("localhost", 27017), {useUnifiedTopology: true});
-processTitles();
+mongoclient.connect().then((db) => 
+    {
+        console.log("DB Opened");
+        var dbo = db.db("movieDB");
+        var formMovies = processTitles();
+        for(var a = 0; a < formMovies.length; a++){
+            //insert document
+            dbo.collection("movies").insertOne(formMovies[a]).then(
+                (res) => {console.log(`Document inserted`);},
+                (err) => {console.log(`Insertion failed\n${err}`); process.exit(1)}
+            );
+        }
+        db.close().then(
+            (res) => {console.log(`Closed Connection`); process.exit(0)},
+            (err) => {console.log(err); process.exit(1)}
+        );
+    },(err) => {console.log(err.message); process.exit(1);});
 
 function processTitles(){
-    var movies = movieData.data, titles = [], formattedMovies = [];
+    var movies = movieData.data, titles = [], formattedMovies = [], cleanMovie = {};
     //pull all unqiue titles from data
     for(var a = 0, iter = movies.length; a < iter; a++){
         if(!titles.includes(movies[a][8])){
@@ -21,11 +37,10 @@ function processTitles(){
                 matchedTitle.push(movies[c]);
             }
         }
-        var cleanMovie = formatTitle(matchedTitle);
-        matchedTitle = [];
+        cleanMovie = formatTitle(matchedTitle);
         formattedMovies.push(cleanMovie);
     }
-    populatedDB(formattedMovies);
+    return formattedMovies;
 }
 
 /**
@@ -39,7 +54,8 @@ function processTitles(){
  * Actors data[i][16-18] obj {name: string, locations: string} Grab from locations
  */
 function formatTitle(movieTitle){
-    var movie = dataFormat;
+    var movie = Object.create(dataFormat);
+    //movie._id = mongo.ObjectID();
     movie.title = movieTitle[0][8] != null ? movieTitle[0][8] : "";
     movie.releaseYear = movieTitle[0][9] != null ? movieTitle[0][9] : "";
     movie.locations = [];
@@ -59,29 +75,5 @@ function formatTitle(movieTitle){
             movie.actors[i].locations.push(movieTitle[j][10]);
         }
     }
-    
     return movie;
-}
-
-function populatedDB(sanitizedData){
-    console.log(`Attempting to insert ${sanitizedData.title}`);
-    mongoclient.connect().then((db) => 
-        {
-            console.log("DB Opened");
-            var dbo = db.db("movieDB");
-            dbo.collection("movies").insertMany(sanitizedData, {ordered: false}).then(
-                (res) => {console.log(`${res}`);},
-                (err) => {
-                    console.log(err); 
-                    db.close().then(
-                    (res) => {console.log(`Closed Connection\n\t${res}`);},
-                    (err) => {console.log(err); process.exit()}
-                );}
-            );
-            db.close().then(
-                (res) => {console.log(`Closed Connection\n\t${res}`);},
-                (err) => {console.log(err); process.exit()}
-            );
-        },
-        (err) => {console.log(err.message); process.exit();});
 }
