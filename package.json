@@ -7,6 +7,10 @@
     "mongodb": "^3.6.1"
   },
   "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abouillon/MongoDatabasePopulation.git"
+  },
   "scripts": {
     "start" : "node db.js",
     "view" : "node viewDb.js",
