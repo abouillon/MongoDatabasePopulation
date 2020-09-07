@@ -8,6 +8,8 @@
   },
   "devDependencies": {},
   "scripts": {
+    "start" : "node db.js",
+    "view" : "node viewDb.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Alek Bouillon",

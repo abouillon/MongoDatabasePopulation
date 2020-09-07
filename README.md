@@ -25,7 +25,9 @@
         * If you have MongoDB added to your System Path you can simply type mongod and press Enter
         * MongoDB must be running before you can run the scripts
     8. In the first command prompt type node db and press Enter
+        * Alternative command is npm run start
     9. After the connection closes type node viewDb and press Enter to view the contents of the database
+        * Alternative command is npm run view
         * Functionality is provided for displaying a single document from the database within the viewDb script
 
 ## Add MongoDB to the system Path

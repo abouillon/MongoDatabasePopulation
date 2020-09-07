@@ -11,7 +11,7 @@
             var dbo = db.db("movieDB");
 
             //get all documents
-            dbo.collection("movies").find().toArray((err, documents) => 
+           dbo.collection("movies").find().toArray((err, documents) => 
             {
 
                 for(var i = 0, len = documents.length; i < len; i++){
