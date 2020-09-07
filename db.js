@@ -1,3 +1,6 @@
+/**
+ * This script performs all necessary actions to sanitize and insert data into the database
+ */
 {
     const mongo = require("mongodb");
     const dataFormat = require("./schema");
